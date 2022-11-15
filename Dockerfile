@@ -1,24 +1,8 @@
-FROM centos:7
-
-MAINTAINER linuxtechlab
-
-LABEL Remarks="This is a dockerfile example for Centos system"
-
-RUN yum -y update && \
-
-yum -y install httpd && \
-
-yum clean all
-
-COPY data/httpd.conf /etc/httpd/conf/httpd.conf
-
-ADD data/html.tar.gz /var/www/html/
-
+FROM ubuntu 
+RUN apt update 
+RUN apt install –y apache2 
+RUN apt install –y apache2-utils 
+RUN apt clean 
 EXPOSE 80
-
-ENV HOME /root
-
-WORKDIR /root
-
-ENTRYPOINT ["ping"]
+CMD [“apache2ctl”, “-D”, “FOREGROUND”]
 
